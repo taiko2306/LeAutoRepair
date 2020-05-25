@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Vehicle Detail
+{% endblock %}
+
+{% block content %}
+    <h2>Vehicle Detail</h2>
+
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset1">
+            <p>VIN: {{vehicle.vin}}<br></p>
+            <p>Make: {{vehicle.make}}<br></p>
+            <p>Model: {{vehicle.model}}<br></p>
+            <p>Year: {{vehicle.year}}<br></p>
+            <p>Reg. Number: {{vehicle.reg_number}}<br></p>
+        </div>
+        <div class="col-md-6 col-md-offset1">
+            <img class="rounded" src="{{vehicle.imageURL}}" width="304" height="236" >
+        </div>
+
+    </div>
+
+    <br>
+    <a href="{% url 'vehicle-update' vehicle.pk %}" class="btn btn-primary">Edit</a>
+    <a href="" class="btn btn-danger">Delete</a>
+    <a href="{% url 'home' %}" class="btn btn-success">Close</a>
+{%endblock %}
