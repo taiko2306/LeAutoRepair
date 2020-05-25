@@ -2,7 +2,7 @@ from django.forms import model_to_dict
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from .forms import VehicleForm
-from .models import Vehicle
+from .models import Vehicle, Service
 from django.urls import reverse_lazy
 
 def home(request):

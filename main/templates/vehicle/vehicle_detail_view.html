@@ -27,6 +27,37 @@
     </div>
     <hr>
 
-    <a href="" class="btn btn-primary">New Service History</a>
+    <h2>Service History</h2>
+    <br>
+    <a href="" class="btn btn-primary">+ Add Service History</a>
+
+    <br>
+    <br>
+    <div class="row">
+        <div class="table-responsive">
+            <table id="myTable" class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Serviced By</th>
+                  <th>Serviced Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for service in vehicle.service_set.all%}
+                <tr>
+                   <td>{{service.name}}</td>
+                   <td>{{service.desc}}</td>
+                   <td>{{service.serviced_by}}</td>
+                   <td>{{service.serviced_date}}</td>
+                </tr>
+
+              {% endfor %}
+              </tbody>
+            </table>
+        </div>
+     </div>
+    <br>
     <a href="{% url 'vehicle-list-view' %}" class="btn btn-dark">Close</a>
 {%endblock %}

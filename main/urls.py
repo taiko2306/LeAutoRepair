@@ -7,4 +7,5 @@ urlpatterns = [
     path('vehicle/update/<int:pk>', UpdateVehicle, name="vehicle-update-view"),
     path('vehicle/add/', AddVehicle, name="vehicle-add-view"),
 
+
 ]
