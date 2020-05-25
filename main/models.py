@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Vehicle(models.Model):
     vin = models.CharField(max_length=20, unique=True)
     reg_number = models.CharField(max_length=30, null=True, blank=True)
@@ -9,7 +8,6 @@ class Vehicle(models.Model):
     year = models.CharField(max_length=4)
     color = models.CharField(max_length=30, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
-
 
     def __str__(self):
         return self.vin + ' | ' + self.make + ' | ' + self.model + ' | ' + self.year
@@ -29,6 +27,6 @@ class Vehicle(models.Model):
         return url
 
     def save(self, *args, **kwargs):
-        self.vin = self.vin.upper()
-        self.reg_number = self.reg_number.upper()
+        self.vin = str(self.vin).upper()
+        self.reg_number = str(self.reg_number).upper()
         return super(Vehicle, self).save(*args, **kwargs)
