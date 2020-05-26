@@ -20,6 +20,7 @@
                   <th scope="col">Color</th>
                   <th scope="col">Last Service Date</th>
                   <th scope="col">Photo</th>
+                  <th scope="col">Photo2</th>
                 </tr>
               </thead>
               <tbody>
@@ -33,7 +34,7 @@
                   <td>{{vehicle.color}}</td>
                   <td>{{vehicle.get_last_service_date}}</td>
                   <td> <img class="img-thumbnail" width="100" height="40" src="{{vehicle.imageURL}}"</td>
-
+                  <td> <img class="img-thumbnail" width="100" height="40" src="{{vehicle.pictureURL}}"</td>
                 </tr>
 
               {% endfor %}

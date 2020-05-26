@@ -1,6 +1,15 @@
 from django.db import models
 from datetime import datetime
 
+class User_Profile(models.Model):
+    fname = models.CharField(max_length=30)
+    lname = models.CharField(max_length = 30)
+    title = models.CharField(max_length=30)
+    email = models.EmailField(default = None)
+    display_picture = models.FileField()
+
+    def __str__(self):
+        return self.fname
 
 class Vehicle(models.Model):
     vin = models.CharField(max_length=20, unique=True)
@@ -10,6 +19,7 @@ class Vehicle(models.Model):
     year = models.CharField(max_length=4)
     color = models.CharField(max_length=30, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
+    display_picture = models.FileField(null=True, blank=True)
 
     def __str__(self):
         return self.vin + ' | ' + self.make + ' | ' + self.model + ' | ' + self.year + ' | ' + self.color
@@ -28,6 +38,14 @@ class Vehicle(models.Model):
             url = '/images/placeholder.png'
         return url
 
+    @property
+    def pictureURL(self):
+        try:
+            url = self.display_picture.url
+            print(url)
+        except:
+            url = ''
+        return url
     def save(self, *args, **kwargs):
         self.vin = str(self.vin).upper()
         self.reg_number = str(self.reg_number).upper()
