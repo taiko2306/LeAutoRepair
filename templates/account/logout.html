@@ -1,0 +1,25 @@
+{% extends "account/allauth_base.html" %}
+
+{% load bootstrap4 %}
+{% load static %}
+{% load account %}
+
+{% block head_title %}Sign Out{% endblock %}
+
+{% block content %}
+
+    <p>Are you sure you want to sign out?</p>
+
+
+    <form method="POST" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary" >Sign Out</button>
+        <a href="{% url 'vehicle-list-view' %}" class="btn btn-secondary">Cancel</a>
+    {% endbuttons %}
+    </form>
+
+{% endblock %}
