@@ -18,34 +18,24 @@ class Vehicle(models.Model):
     model = models.CharField(max_length=200)
     year = models.CharField(max_length=4)
     color = models.CharField(max_length=30, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
-    display_picture = models.FileField(null=True, blank=True)
+    image = models.ImageField(upload_to='vehicle_image',null=True, blank=True, default='vehicle_image/placeholder.png')
 
     def __str__(self):
-        return self.vin + ' | ' + self.make + ' | ' + self.model + ' | ' + self.year + ' | ' + self.color
+        return str(self.vin) + ' | ' + str(self.make) + ' | ' + str(self.model) + ' | ' + str(self.year) + ' | ' + str(self.color)
 
-    #@property
+    @property
     def get_last_service_date(self):
         return "2020-01-01"
-    image = models.ImageField(upload_to='vehicle_image',null=True, blank=True, default='vehicle_image/placeholder.png')
+
 
     @property
     def imageURL(self):
         try:
             url = self.image.url
-            print(url)
         except:
             url = '/images/placeholder.png'
         return url
 
-    @property
-    def pictureURL(self):
-        try:
-            url = self.display_picture.url
-            print(url)
-        except:
-            url = ''
-        return url
     def save(self, *args, **kwargs):
         self.vin = str(self.vin).upper()
         self.reg_number = str(self.reg_number).upper()

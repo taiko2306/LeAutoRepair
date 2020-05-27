@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from .forms import VehicleForm, Profile_Form
 from .models import Vehicle, Service, User_Profile
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 def create_profile(request):
@@ -22,11 +23,11 @@ def create_profile(request):
     context = {"form": form,}
     return render(request, 'profile/create.html', context)
 
-
 def home(request):
     #vehicles = Vehicle.objects.all()
     #context = {'vehicles': vehicles}
     #return render(request, 'home.html', context)
+    # redirect home page
     return HttpResponseRedirect(reverse_lazy('vehicle-list-view'))
 
 def ShowVehicleList(request):
@@ -76,15 +77,22 @@ def AddVehicle(request):
     if request.method == 'POST':
         form = VehicleForm(request.POST, request.FILES)
         if form.is_valid():
-            vehicle = Vehicle.objects.create()
-            vehicle.vin = form.cleaned_data["vin"]
-            vehicle.reg_number = form.cleaned_data["reg_number"]
-            vehicle.make = form.cleaned_data["make"]
-            vehicle.model = form.cleaned_data["model"]
-            vehicle.year = form.cleaned_data["year"]
-            vehicle.color = form.cleaned_data["color"]
-            vehicle.image = form.cleaned_data["image"]
-            vehicle.save()
+            #vehicle = Vehicle.objects.create()
+            #vehicle.vin = form.cleaned_data["vin"]
+            #vehicle.reg_number = form.cleaned_data["reg_number"]
+            #vehicle.make = form.cleaned_data["make"]
+            #vehicle.model = form.cleaned_data["model"]
+            #vehicle.year = form.cleaned_data["year"]
+            #vehicle.color = form.cleaned_data["color"]
+            #vehicle.image = form.cleaned_data["image"]
+            #vehicle.picture = form.cleaned_data["picture"]
+            #vehicle.save()
+            form.save()
+            #make = form.cleaned_data["make"]
+            #model = form.cleaned_data["model"]
+            #year = form.cleaned_data("year")
+            vin = form.cleaned_data["vin"]
+            messages.success(request, f'New vehicle created with VIN #: {vin}!')
 
             return HttpResponseRedirect(reverse_lazy('vehicle-list-view'))
     else:

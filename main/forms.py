@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from .models import Vehicle, User_Profile
 
 
+
 class Profile_Form(ModelForm):
     class Meta:
         model = User_Profile
@@ -32,7 +33,6 @@ class VehicleForm(ModelForm):
             "year",
             "color",
             "image",
-            'display_picture',
         ]
         labels = {
             "vin": "VIN",
@@ -42,7 +42,6 @@ class VehicleForm(ModelForm):
             "year": "Year",
             "color": "Color",
             "image": "Image",
-            "display_picture": "Picture",
         }
 
     def __init__(self, *args, **kwargs):
