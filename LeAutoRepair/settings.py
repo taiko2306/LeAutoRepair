@@ -156,6 +156,27 @@ ACCOUNT_TEMPLATE_EXTENSION = "html"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ""
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#AWS Settings
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'email-smtp.us-west-2.amazonaws.com'
+#EMAIL_HOST_USER = 'AKIAJ5SHONS5QHJECTMQ'
+#EMAIL_HOST_PASSWORD = 'AjagBRAaICG94f/vMtARbVRfF2HIYNc6GWuxJyxlhNO0'
+#EMAIL_PORT = 25
+#EMAIL_USE_TLS = True
+
+#zoho mail settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_HOST_USER = 'taiko.aronson@gmail.com'
+EMAIL_HOST_PASSWORD = '9ZYKJHCkFL5n'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+DEFAULT_FROM_EMAIL = "taiko.aronson@gmail.com"
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -173,6 +194,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'main/media')
 # Activate Django-Heroku
 django_heroku.settings(locals())
 
+# AWS S3
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
