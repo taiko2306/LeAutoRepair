@@ -9,6 +9,12 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'
 
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = 'default.jpg'
+
 class User_Profile(models.Model):
     fname = models.CharField(max_length=30)
     lname = models.CharField(max_length = 30)
