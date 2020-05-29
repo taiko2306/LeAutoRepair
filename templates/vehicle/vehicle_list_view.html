@@ -2,9 +2,11 @@
 {% block title %}Vehicle List{% endblock %}
 {% block header %}<h2>Vehicle List</h2>{% endblock %}
 {% block content %}
+    {% if user.is_authenticated %}
     <br>
     <a href="{%url 'vehicle-add-view' %}" class="btn btn-primary">Add Vehicle</a>
     <br>
+    {% endif %}
     <br>
     <div class="row">
         <div class="'col-md-8 col-md-offset2">

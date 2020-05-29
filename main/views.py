@@ -1,10 +1,26 @@
+from django.shortcuts import render, redirect
 from django.forms import model_to_dict
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from .forms import VehicleForm, Profile_Form
-from .models import Vehicle, Service, User_Profile
+from .models import Vehicle, Service, User_Profile, Profile
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Your account has been created! You are now able to log in')
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'user/register.html', {'form': form})
+
 
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 def create_profile(request):
@@ -30,6 +46,25 @@ def home(request):
     # redirect home page
     return HttpResponseRedirect(reverse_lazy('vehicle-list-view'))
 
+@login_required
+def ShowUserProfile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.info(request, f'Your account has been been updated!')
+            return HttpResponseRedirect(reverse_lazy('profile'))
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'user/profile.html', context)
+
 def ShowVehicleList(request):
     vehicles = Vehicle.objects.all()
     context = {'vehicles': vehicles}
@@ -40,6 +75,7 @@ def ShowVehicleDetail(request, pk):
     context = {'operation': 'View', 'vehicle': vehicle}
     return render(request, 'vehicle/vehicle_detail_view.html', context)
 
+@login_required
 def UpdateVehicle(request, pk):
     print('UpdateVehicle')
     vehicle = get_object_or_404(Vehicle, pk=pk)
@@ -73,6 +109,7 @@ def UpdateVehicle(request, pk):
 
     return render(request, 'vehicle/vehicle_update.html', context)
 
+@login_required
 def AddVehicle(request):
     if request.method == 'POST':
         form = VehicleForm(request.POST, request.FILES)
