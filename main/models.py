@@ -4,26 +4,13 @@ from datetime import datetime
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    position = models.CharField(max_length=30, null=True, blank=True)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     def __str__(self):
         return f'{self.user.username} Profile'
 
-    def imageURL(self):
-        try:
-            url = self.image.url
-        except:
-            url = 'default.jpg'
 
-class User_Profile(models.Model):
-    fname = models.CharField(max_length=30)
-    lname = models.CharField(max_length = 30)
-    title = models.CharField(max_length=30)
-    email = models.EmailField(default = None)
-    display_picture = models.FileField()
-
-    def __str__(self):
-        return self.fname
 
 class Vehicle(models.Model):
     vin = models.CharField(max_length=20, unique=True)
@@ -42,13 +29,13 @@ class Vehicle(models.Model):
         return "2020-01-01"
 
 
-    @property
-    def imageURL(self):
-        try:
-            url = self.image.url
-        except:
-            url = '/images/placeholder.png'
-        return url
+#    @property
+#    def imageURL(self):
+#        try:
+#            url = self.image.url
+#        except:
+#            url = '/images/placeholder.png'
+#        return url
 
     def save(self, *args, **kwargs):
         self.vin = str(self.vin).upper()

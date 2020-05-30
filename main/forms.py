@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Vehicle, Profile, User_Profile
+from .models import Vehicle, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -23,23 +23,23 @@ class ProfileUpdateForm(ModelForm):
         model = Profile
         fields = ['image']
 
-class Profile_Form(ModelForm):
-    class Meta:
-        model = User_Profile
-        fields = [
-        'fname',
-        'lname',
-        'title',
-        'email',
-        'display_picture',
-        ]
-        labels = {
-            "fname": "First Name",
-            "lname": "Last Name",
-            "title": "Title",
-            "email": "Email",
-            "display_picture": "Picture",
-        }
+#class Profile_Form(ModelForm):
+#    class Meta:
+#        model = User_Profile
+#        fields = [
+#        'fname',
+#        'lname',
+#        'title',
+#        'email',
+#        'display_picture',
+#        ]
+#        labels = {
+#            "fname": "First Name",
+#            "lname": "Last Name",
+#            "title": "Title",
+#            "email": "Email",
+#            "display_picture": "Picture",
+#        }
 
 class VehicleForm(ModelForm):
     class Meta:

@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.forms import model_to_dict
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from .forms import VehicleForm, Profile_Form
-from .models import Vehicle, Service, User_Profile, Profile
+from .forms import VehicleForm
+from .models import Vehicle, Service, Profile
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -22,22 +22,22 @@ def register(request):
     return render(request, 'user/register.html', {'form': form})
 
 
-IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
-def create_profile(request):
-    form = Profile_Form()
-    if request.method == 'POST':
-        form = Profile_Form(request.POST, request.FILES)
-        if form.is_valid():
-            user_pr = form.save(commit=False)
-            user_pr.display_picture = request.FILES['display_picture']
-            file_type = user_pr.display_picture.url.split('.')[-1]
-            file_type = file_type.lower()
-            if file_type not in IMAGE_FILE_TYPES:
-                return render(request, 'profile/error.html')
-            user_pr.save()
-            return render(request, 'profile/details.html', {'user_pr': user_pr})
-    context = {"form": form,}
-    return render(request, 'profile/create.html', context)
+#IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
+#def create_profile(request):
+#    form = Profile_Form()
+#    if request.method == 'POST':
+#        form = Profile_Form(request.POST, request.FILES)
+#        if form.is_valid():
+#            user_pr = form.save(commit=False)
+#            user_pr.display_picture = request.FILES['display_picture']
+#            file_type = user_pr.display_picture.url.split('.')[-1]
+#            file_type = file_type.lower()
+#            if file_type not in IMAGE_FILE_TYPES:
+#                return render(request, 'profile/error.html')
+#            user_pr.save()
+#            return render(request, 'profile/details.html', {'user_pr': user_pr})
+#    context = {"form": form,}
+#    return render(request, 'profile/create.html', context)
 
 def home(request):
     #vehicles = Vehicle.objects.all()

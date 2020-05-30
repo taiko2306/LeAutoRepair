@@ -29,13 +29,6 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
-            <!--
-                {% if user.profile.imageURL %}
-                   <li class="nav-item">
-                    <img src="{{ user.profile.imageURL }}" class="image_responsive" height="30px" width="30px">
-                  </li>
-                {% endif %}
-            -->
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'profile'%}">Profile</a>
               </li>
