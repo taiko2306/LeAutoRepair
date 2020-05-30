@@ -5,7 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Vehicle Detail</h2>
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{vehicle.image.url}}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="{% url 'vehicle-update-view' vehicle.pk %}" class="btn btn-primary">Edit Vehicle Detail</a>
+      </div>
+    </div>
+
+
     {% if user.is_authenticated %}
     <br>
     <a href="{% url 'vehicle-update-view' vehicle.pk %}" class="btn btn-secondary">Edit</a>
@@ -23,7 +32,7 @@
 
         </div>
         <div class="col-md-6 col-md-offset1">
-            <img class="rounded" src="{{vehicle.image.url}}" width="304" height="236" >
+            <img class="rounded-circle" src="{{vehicle.image.url}}" width="304" height="236" >
         </div>
 
     </div>
